@@ -7,24 +7,27 @@ export const Card = ({ children, className = "", id, ...props }: { children: Rea
   </div>
 );
 
-export const Button = ({ children, onClick, className = "", variant = "primary", disabled, id }: { 
+export const Button = ({ children, onClick, className = "", variant = "primary", disabled, id, type }: { 
   children: React.ReactNode, 
   onClick?: () => void, 
   className?: string, 
-  variant?: "primary" | "secondary" | "danger" | "ghost",
+  variant?: "primary" | "secondary" | "danger" | "ghost" | "outline",
   disabled?: boolean,
-  id?: string
+  id?: string,
+  type?: "button" | "submit" | "reset"
 }) => {
   const variants = {
     primary: "bg-indigo-600 text-white hover:bg-indigo-700 shadow-md",
     secondary: "bg-slate-100 text-slate-800 hover:bg-slate-200",
     danger: "bg-rose-500 text-white hover:bg-rose-600",
-    ghost: "bg-transparent text-slate-500 hover:bg-slate-50"
+    ghost: "bg-transparent text-slate-500 hover:bg-slate-50",
+    outline: "bg-transparent border-2 border-slate-100 text-slate-500 hover:border-slate-200 hover:bg-slate-50"
   };
 
   return (
     <button 
       id={id}
+      type={type}
       onClick={onClick}
       disabled={disabled}
       className={`px-5 py-2.5 rounded-xl transition-all duration-200 font-bold text-sm tracking-tight disabled:opacity-50 disabled:cursor-not-allowed ${variants[variant]} ${className}`}
