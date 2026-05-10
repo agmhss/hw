@@ -53,8 +53,12 @@ export default function Navigation() {
               }
             `}
           >
-            <item.icon className={`w-5 h-5 ${isActive ? 'text-indigo-600' : 'text-indigo-300'}`} />
-            {item.label}
+            {({ isActive }) => (
+              <>
+                <item.icon className={`w-5 h-5 ${isActive ? 'text-indigo-600' : 'text-indigo-300'}`} />
+                {item.label}
+              </>
+            )}
           </NavLink>
         ))}
       </div>

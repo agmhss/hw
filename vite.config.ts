@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig, loadEnv} from 'vite';
 
+// If deploying to GitHub Pages, set 'base' to your repository name:
+// base: '/your-repo-name/',
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {

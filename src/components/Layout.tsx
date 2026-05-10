@@ -2,6 +2,7 @@ import React from 'react';
 import Navigation from './Navigation';
 import { useAuth } from './AuthProvider';
 import Login from './Login';
+import { Badge } from './UI';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { user, profile, loading } = useAuth();

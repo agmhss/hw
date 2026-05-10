@@ -89,8 +89,8 @@ export function AdminDashboard() {
             <h2 className="text-indigo-200 text-xs uppercase font-black tracking-widest mb-4">Infrastructure Status</h2>
             <h3 className="text-4xl font-black leading-tight mb-6">Database Isolation <br/>Verified & Secure</h3>
             <div className="flex gap-4">
-              <Badge variant="success" className="bg-white/10 text-white">Encrypted</Badge>
-              <Badge variant="success" className="bg-white/10 text-white">Hashed UID</Badge>
+              <Badge variant="success">Encrypted</Badge>
+              <Badge variant="success">Hashed UID</Badge>
             </div>
           </div>
           <div className="absolute bottom-[-40px] right-[-40px] text-[200px] opacity-10">🛡️</div>
