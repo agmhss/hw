@@ -7,8 +7,7 @@ export const getGeminiApiKey = () => {
   const savedKey = localStorage.getItem(STORAGE_KEY);
   if (savedKey) return savedKey;
   
-  // Fallback to environment variable
-  return process.env.GEMINI_API_KEY || "";
+  return "";
 };
 
 export const saveGeminiApiKey = (key: string) => {

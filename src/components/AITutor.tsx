@@ -64,12 +64,30 @@ export default function AITutor() {
             </div>
           )}
           
-          {error && (
+          {error ? (
             <div className="bg-rose-500/10 border border-rose-500/20 p-4 rounded-2xl">
               <p className="text-[10px] font-black text-rose-400 uppercase tracking-tight">{error}</p>
+              <button 
+                onClick={() => window.location.hash = '/settings'}
+                className="text-[10px] text-white underline mt-2 font-black uppercase"
+              >
+                Go to Settings
+              </button>
             </div>
-          )}
+          ) : null}
         </div>
+
+        {!getGeminiApiKey() && !error && (
+          <div className="mb-4 bg-indigo-500/10 border border-indigo-500/20 p-4 rounded-2xl">
+            <p className="text-[10px] font-bold text-indigo-300">AI Key not set. Please visit settings to configure your Gemini API key.</p>
+            <button 
+              onClick={() => window.location.hash = '/settings'}
+              className="text-[10px] text-white underline mt-1 font-black uppercase"
+            >
+              Configure Now
+            </button>
+          </div>
+        )}
 
         <div className="space-y-4">
           <Textarea
