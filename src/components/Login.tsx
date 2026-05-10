@@ -18,6 +18,12 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    
+    if (!email || !password || (!isLogin && !name)) {
+      setError("Please fill in all required fields.");
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -34,7 +40,13 @@ export default function Login() {
         });
       }
     } catch (err: any) {
-      setError(err.message);
+      console.error("Auth Error:", err);
+      let message = err.message;
+      if (err.code === 'auth/missing-password') message = "Please enter a password.";
+      if (err.code === 'auth/invalid-email') message = "The email address is not valid.";
+      if (err.code === 'auth/weak-password') message = "The password is too weak (min 6 characters).";
+      if (err.code === 'auth/user-not-found') message = "No account found with this email. Please Create Account first.";
+      setError(message);
     } finally {
       setLoading(false);
     }
