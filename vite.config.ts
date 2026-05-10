@@ -4,10 +4,13 @@ import path from 'path';
 import {defineConfig, loadEnv} from 'vite';
 
 // If deploying to GitHub Pages, set 'base' to your repository name:
-// base: '/your-repo-name/',
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
+  // Use /hw/ for production (GitHub Pages) and / for development (AI Studio)
+  const base = mode === 'production' ? '/hw/' : '/';
+  
   return {
+    base,
     plugins: [react(), tailwindcss()],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
