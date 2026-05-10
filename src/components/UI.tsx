@@ -56,7 +56,12 @@ export const Input = ({ label, type = "text", placeholder, value, onChange, clas
   </div>
 );
 
-export const Badge = ({ children, variant = "neutral", id }: { children: React.ReactNode, variant?: "neutral" | "success" | "warning" | "danger", id?: string }) => {
+export const Badge = ({ children, variant = "neutral", className = "", id }: { 
+  children: React.ReactNode, 
+  variant?: "neutral" | "success" | "warning" | "danger",
+  className?: string,
+  id?: string 
+}) => {
   const variants = {
     neutral: "bg-slate-100 text-slate-600",
     success: "bg-emerald-100 text-emerald-700",
@@ -64,11 +69,33 @@ export const Badge = ({ children, variant = "neutral", id }: { children: React.R
     danger: "bg-rose-100 text-rose-700"
   };
   return (
-    <span id={id} className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${variants[variant]}`}>
+    <span id={id} className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${variants[variant]} ${className}`}>
       {children}
     </span>
   );
 };
+
+export const Textarea = ({ label, placeholder, value, onChange, className = "", id, rows = 3 }: {
+  label?: string,
+  placeholder?: string,
+  value: string,
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void,
+  className?: string,
+  id?: string,
+  rows?: number
+}) => (
+  <div className={`space-y-2 ${className}`}>
+    {label && <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{label}</label>}
+    <textarea
+      id={id}
+      rows={rows}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-400 outline-none transition-all placeholder:text-slate-300 font-medium resize-none"
+    />
+  </div>
+);
 
 export const IconLabel = ({ icon: Icon, label, className = "" }: { icon: LucideIcon, label: string, className?: string }) => (
   <div className={`flex items-center gap-2 text-sm text-gray-600 ${className}`}>

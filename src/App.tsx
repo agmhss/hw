@@ -4,6 +4,7 @@ import { AuthProvider } from './components/AuthProvider';
 import Layout from './components/Layout';
 import Dashboard from './components/Dashboard';
 import Placeholder from './components/Placeholder';
+import Settings from './components/Settings';
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
             <Route path="/calendar" element={<Placeholder title="School Calendar & Events" />} />
             <Route path="/messages" element={<Placeholder title="Secure Messaging" />} />
             <Route path="/announcements" element={<Placeholder title="School News" />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </Layout>
       </AuthProvider>

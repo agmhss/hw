@@ -25,6 +25,7 @@ export default function Navigation() {
     { label: 'Calendar', icon: Calendar, path: '/calendar', roles: ['admin', 'teacher', 'student'] },
     { label: 'Messaging', icon: MessageSquare, path: '/messages', roles: ['admin', 'teacher', 'student'] },
     { label: 'Announcements', icon: Bell, path: '/announcements', roles: ['admin'] },
+    { label: 'Settings', icon: Settings, path: '/settings', roles: ['admin', 'teacher', 'student'] },
   ];
 
   const filteredItems = navItems.filter(item => profile && item.roles.includes(profile.role));

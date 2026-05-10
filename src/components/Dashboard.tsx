@@ -31,6 +31,7 @@ const item = {
 };
 
 import { setupInitialSchoolStructure } from '../services/schoolService';
+import AITutor from './AITutor';
 
 export function AdminDashboard() {
   const [settingUp, setSettingUp] = useState(false);
@@ -190,7 +191,12 @@ export function StudentDashboard() {
           <div className="absolute bottom-[-30px] right-[-30px] text-[180px] opacity-20">🏆</div>
         </motion.section>
 
-        {/* GPA Summary Section */}
+        {/* Smart AI Tutor Section */}
+        <motion.section variants={item} className="col-span-12 lg:col-span-4">
+          <AITutor />
+        </motion.section>
+
+        {/* GPA Summary Section - Now lower or hidden if desired, I'll move it to col-span-4 next to tasks */}
         <motion.section variants={item} className="col-span-12 lg:col-span-4">
           <Card className="p-8 h-full flex flex-col justify-between">
             <div>
