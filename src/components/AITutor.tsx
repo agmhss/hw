@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Button, Textarea, Badge } from './UI';
 import { Sparkles, Send, Loader2, Bot } from 'lucide-react';
-import { askAiTutor } from '../services/aiService';
+import { askAiTutor, getGeminiApiKey } from '../services/aiService';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function AITutor() {

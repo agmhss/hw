@@ -30,7 +30,7 @@ export const askAiTutor = async (question: string, context?: string) => {
   if (!ai) throw new Error("AI Service not configured. Please check your API key in Settings.");
 
   const model = "gemini-3-flash-preview";
-  const systemInstruction = "You are an expert AI Study Buddy for EduPulse, a modern School Management System. Help students with their subjects concisely. Current context: " + (context || "General campus help");
+  const systemInstruction = "You are an expert AI Study Buddy for AGMHSS EduPulse, a modern School Management System. Help students with their subjects concisely. Current context: " + (context || "General campus help");
 
   try {
     const response = await ai.models.generateContent({

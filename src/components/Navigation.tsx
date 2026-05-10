@@ -37,7 +37,7 @@ export default function Navigation() {
           <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center font-bold text-indigo-600 text-xl">
             E
           </div>
-          <span className="text-white font-bold text-lg tracking-tight">EduPulse</span>
+          <span className="text-white font-bold text-lg tracking-tight">AGMHSS EduPulse</span>
         </div>
       </div>
 

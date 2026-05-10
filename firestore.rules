@@ -31,8 +31,11 @@ service cloud.firestore {
 
       allow get: if isSignedIn();
       allow list: if isAdmin();
-      allow create: if isSignedIn() && isValidUser(incoming()) && incoming().role == 'student'; // Default auto-reg for students
-      allow create: if isAdmin(); // Admin can create any user
+      allow create: if isSignedIn() && isValidUser(incoming()) && (
+        incoming().role == 'student' || 
+        (incoming().role == 'admin' && request.auth.token.email == 'agmhsspatteeswaram@gmail.com')
+      ); 
+      allow create: if isAdmin(); // Admin can create any user after being established
       allow update: if (isAdmin() || (isOwner('uid') && incoming().diff(existing()).affectedKeys().hasOnly(['name', 'phoneNumber'])));
     }
 

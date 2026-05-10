@@ -26,7 +26,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 sticky top-0 z-10">
           <div className="flex items-center gap-4">
             <h1 className="text-2xl font-black text-slate-800 tracking-tight">
-              {profile?.role === 'student' ? `Morning, ${profile?.name}` : `EduPulse Management`}
+              {profile?.role === 'student' ? `Morning, ${profile?.name}` : `AGMHSS EduPulse Management`}
             </h1>
             <Badge variant="success">{profile?.role} Access</Badge>
           </div>

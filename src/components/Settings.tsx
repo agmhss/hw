@@ -35,7 +35,7 @@ export default function Settings() {
     <motion.div variants={container} initial="hidden" animate="show" className="space-y-8 max-w-4xl">
       <header>
         <h1 className="text-4xl font-black text-slate-800 tracking-tight">System Settings</h1>
-        <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px] mt-1">Configure your personal EduPulse environment</p>
+        <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px] mt-1">Configure your personal AGMHSS EduPulse environment</p>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -101,7 +101,7 @@ export default function Settings() {
             <Card className="p-8 bg-indigo-600 text-white border-indigo-500 shadow-xl shadow-indigo-500/20">
               <h4 className="text-[10px] font-black uppercase tracking-widest mb-6 opacity-80">Security Notice</h4>
               <p className="text-xs font-medium leading-relaxed mb-6">
-                EduPulse ensures that your API keys are never included in the source code or committed to GitHub. 
+                AGMHSS EduPulse ensures that your API keys are never included in the source code or committed to GitHub. 
               </p>
               <Badge variant="success" className="bg-white/20 text-white">Encrypted Storage</Badge>
             </Card>

@@ -110,6 +110,32 @@ export function AdminDashboard() {
             </div>
           </Card>
         </motion.div>
+
+        <motion.section variants={item} className="col-span-12">
+          <Card className="p-8">
+            <div className="flex justify-between items-center mb-8">
+              <h3 className="text-xl font-black text-slate-800 tracking-tight">Active Faculty & Staff</h3>
+              <Button variant="outline" className="text-[10px] font-black uppercase tracking-widest px-6">Invite Member</Button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {[
+                { name: 'Dr. Sarah Wilson', role: 'Head of Dept', status: 'Active' },
+                { name: 'Prof. Michael Chen', role: 'Senior Faculty', status: 'On Leave' },
+                { name: 'Mrs. Emily Davis', role: 'Administrator', status: 'Active' },
+              ].map((staff, i) => (
+                <div key={i} className="flex items-center gap-4 p-4 rounded-2xl border-2 border-slate-50 hover:border-indigo-100 transition-all cursor-pointer bg-slate-50/50">
+                  <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-xs">
+                    {staff.name[0]}
+                  </div>
+                  <div>
+                    <p className="text-sm font-black text-slate-800">{staff.name}</p>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{staff.role}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </motion.section>
       </div>
     </motion.div>
   );

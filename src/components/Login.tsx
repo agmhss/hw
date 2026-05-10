@@ -51,7 +51,7 @@ export default function Login() {
           <div className="inline-flex items-center justify-center w-20 h-20 bg-indigo-600 text-white rounded-[28px] mb-6 shadow-2xl shadow-indigo-500/30">
             <GraduationCap className="w-10 h-10" />
           </div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tighter">EduPulse</h1>
+          <h1 className="text-4xl font-black text-slate-900 tracking-tighter">AGMHSS EduPulse</h1>
           <p className="text-slate-500 mt-2 font-bold uppercase tracking-widest text-[10px]">Unified Learning Management</p>
         </div>
 
@@ -117,9 +117,10 @@ export default function Login() {
           <div className="mt-10 pt-8 border-t-2 border-slate-50 text-center">
             <button
               onClick={() => setIsLogin(!isLogin)}
-              className="text-xs font-black text-indigo-600 hover:text-indigo-700 uppercase tracking-widest"
+              className="text-xs font-black text-indigo-600 hover:text-indigo-700 uppercase tracking-widest flex items-center justify-center gap-2 mx-auto"
             >
-              {isLogin ? "Request Enrollment" : 'Return to Gate'}
+              <School className="w-4 h-4" />
+              {isLogin ? "New to AGMHSS EduPulse? Create Account" : 'Back to Login'}
             </button>
           </div>
         </Card>
