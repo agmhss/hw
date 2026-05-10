@@ -1,0 +1,129 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Represents a user in the system (Admin, Teacher, Student)",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["admin", "teacher", "student"] },
+        "classId": { "type": "string", "description": "Required for students and teachers" },
+        "sectionId": { "type": "string", "description": "Required for students and teachers" },
+        "phoneNumber": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "name", "email", "role"]
+    },
+    "Class": {
+      "title": "Class",
+      "description": "Represents a physical class (e.g., Class 10)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "gradeLevel": { "type": "number", "description": "LKG=-2, UKG=-1, 1-12" }
+      },
+      "required": ["id", "name"]
+    },
+    "Section": {
+      "title": "Section",
+      "description": "Represents a section within a class (e.g., Section A)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "classId": { "type": "string" }
+      },
+      "required": ["id", "name", "classId"]
+    },
+    "Assignment": {
+      "title": "Assignment",
+      "description": "Homework or project task",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "dueDate": { "type": "string", "format": "date-time" },
+        "subject": { "type": "string" },
+        "classId": { "type": "string" },
+        "sectionId": { "type": "string" },
+        "teacherId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "dueDate", "classId", "sectionId", "teacherId"]
+    },
+    "Grade": {
+      "title": "Grade",
+      "description": "Academic performance record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "assignmentId": { "type": "string" },
+        "subject": { "type": "string" },
+        "score": { "type": "number" },
+        "maxScore": { "type": "number" },
+        "feedback": { "type": "string" },
+        "teacherId": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" }
+      },
+      "required": ["studentId", "subject", "score", "maxScore", "teacherId"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "Global or targeted news/notifications",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "target": { "type": "string", "enum": ["school", "class", "section"] },
+        "classId": { "type": "string" },
+        "sectionId": { "type": "string" },
+        "authorId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "content", "target", "authorId"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Direct communication between users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "senderId": { "type": "string" },
+        "receiverId": { "type": "string" },
+        "content": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["senderId", "receiverId", "content", "timestamp"]
+    },
+    "PTM": {
+      "title": "Parent Teacher Meeting",
+      "description": "Scheduled meetings between parents and teachers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "teacherId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "dateTime": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["scheduled", "completed", "cancelled"] },
+        "link": { "type": "string", "description": "Optional virtual meeting link" }
+      },
+      "required": ["teacherId", "studentId", "dateTime", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": { "schema": "User", "description": "Base user profile" },
+    "/classes/{classId}": { "schema": "Class", "description": "School classes" },
+    "/classes/{classId}/sections/{sectionId}": { "schema": "Section", "description": "Sections within a class" },
+    "/assignments/{assignmentId}": { "schema": "Assignment", "description": "Assignment details" },
+    "/grades/{gradeId}": { "schema": "Grade", "description": "Student grades" },
+    "/announcements/{announcementId}": { "schema": "Announcement", "description": "School-wide and class-specific news" },
+    "/messages/{messageId}": { "schema": "Message", "description": "Private chat messages" },
+    "/ptm/{ptmId}": { "schema": "PTM", "description": "Meeting schedules" }
+  }
+}
