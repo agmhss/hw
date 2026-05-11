@@ -19,15 +19,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Safety timeout to prevent eternal loading
+    const timeoutId = setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+
     // Check for demo session in local storage
     const demoProfile = localStorage.getItem('demo_profile');
     if (demoProfile) {
       setProfile(JSON.parse(demoProfile));
       setLoading(false);
+      clearTimeout(timeoutId);
       return;
     }
 
     return onAuthStateChanged(auth, async (firebaseUser) => {
+      clearTimeout(timeoutId);
       setUser(firebaseUser);
       if (firebaseUser) {
         try {

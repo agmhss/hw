@@ -171,7 +171,7 @@ export default function Login() {
             <Input
               label="Access Secret (Password)"
               type="password"
-              placeholder="••••••••"
+              placeholder="Demo: 12345678"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />

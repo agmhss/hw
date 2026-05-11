@@ -37,14 +37,15 @@ export const Button = ({ children, onClick, className = "", variant = "primary",
   );
 };
 
-export const Input = ({ label, type = "text", placeholder, value, onChange, className = "", id }: {
+export const Input = ({ label, type = "text", placeholder, value, onChange, className = "", id, required }: {
   label?: string,
   type?: string,
   placeholder?: string,
   value: string,
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
   className?: string,
-  id?: string
+  id?: string,
+  required?: boolean
 }) => (
   <div className={`space-y-2 ${className}`}>
     {label && <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{label}</label>}
@@ -54,6 +55,7 @@ export const Input = ({ label, type = "text", placeholder, value, onChange, clas
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      required={required}
       className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-400 outline-none transition-all placeholder:text-slate-300 font-medium"
     />
   </div>
@@ -78,14 +80,15 @@ export const Badge = ({ children, variant = "neutral", className = "", id }: {
   );
 };
 
-export const Textarea = ({ label, placeholder, value, onChange, className = "", id, rows = 3 }: {
+export const Textarea = ({ label, placeholder, value, onChange, className = "", id, rows = 3, required }: {
   label?: string,
   placeholder?: string,
   value: string,
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void,
   className?: string,
   id?: string,
-  rows?: number
+  rows?: number,
+  required?: boolean
 }) => (
   <div className={`space-y-2 ${className}`}>
     {label && <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">{label}</label>}
@@ -95,6 +98,7 @@ export const Textarea = ({ label, placeholder, value, onChange, className = "", 
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      required={required}
       className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-400 outline-none transition-all placeholder:text-slate-300 font-medium resize-none"
     />
   </div>
