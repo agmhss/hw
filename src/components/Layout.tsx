@@ -3,9 +3,14 @@ import Navigation from './Navigation';
 import { useAuth } from './AuthProvider';
 import Login from './Login';
 import { Badge } from './UI';
+import { useLocation } from 'react-router-dom';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { user, profile, loading } = useAuth();
+  const location = useLocation();
+
+  // Define public routes that don't require authentication
+  const isPublicRoute = location.pathname.startsWith('/assignments/');
 
   if (loading) {
     return (
@@ -13,6 +18,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="w-12 h-12 border-4 border-blue-600/20 border-t-blue-600 rounded-full animate-spin" />
       </div>
     );
+  }
+
+  // If it's a public route, render just the content without the sidebar or auth check
+  if (isPublicRoute) {
+    return <>{children}</>;
   }
 
   if (!user || !profile) {

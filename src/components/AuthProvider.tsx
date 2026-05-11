@@ -19,6 +19,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Check for demo session in local storage
+    const demoProfile = localStorage.getItem('demo_profile');
+    if (demoProfile) {
+      setProfile(JSON.parse(demoProfile));
+      setLoading(false);
+      return;
+    }
+
     return onAuthStateChanged(auth, async (firebaseUser) => {
       setUser(firebaseUser);
       if (firebaseUser) {
@@ -37,7 +45,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  const signOut = () => auth.signOut();
+  const signOut = async () => {
+    localStorage.removeItem('demo_profile');
+    await auth.signOut();
+    window.location.reload(); // Hard reset to clear state
+  };
 
   return (
     <AuthContext.Provider value={{ user, profile, loading, signOut }}>

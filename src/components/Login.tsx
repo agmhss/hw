@@ -1,47 +1,10 @@
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
-import { auth, db } from '../lib/firebase';
+import { auth, db, handleFirestoreError, OperationType } from '../lib/firebase';
 import { Card, Button, Input, IconLabel } from './UI';
 import { GraduationCap, School } from 'lucide-react';
 import { motion } from 'motion/react';
-
-enum OperationType {
-  CREATE = 'create',
-  UPDATE = 'update',
-  DELETE = 'delete',
-  LIST = 'list',
-  GET = 'get',
-  WRITE = 'write',
-}
-
-interface FirestoreErrorInfo {
-  error: string;
-  operationType: OperationType;
-  path: string | null;
-  authInfo: {
-    userId?: string | null;
-    email?: string | null;
-    emailVerified?: boolean | null;
-    isAnonymous?: boolean | null;
-  }
-}
-
-function handleFirestoreError(error: unknown, operationType: OperationType, path: string | null) {
-  const errInfo: FirestoreErrorInfo = {
-    error: error instanceof Error ? error.message : String(error),
-    authInfo: {
-      userId: auth.currentUser?.uid,
-      email: auth.currentUser?.email,
-      emailVerified: auth.currentUser?.emailVerified,
-      isAnonymous: auth.currentUser?.isAnonymous,
-    },
-    operationType,
-    path
-  };
-  console.error('Firestore Error: ', JSON.stringify(errInfo));
-  throw new Error(JSON.stringify(errInfo));
-}
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -124,10 +87,30 @@ export default function Login() {
       }
     } catch (err: any) {
       console.error("Google Auth Error:", err);
-      setError(err.message);
+      let message = err.message;
+      if (err.code === 'auth/unauthorized-domain') {
+        message = "This domain (agmhss.github.io) is not authorized for Google Sign-in. Please add it to 'Authorized domains' in Firebase Console > Authentication > Settings.";
+      } else if (err.code === 'auth/popup-blocked') {
+        message = "The sign-in popup was blocked by your browser. Please allow popups for this site.";
+      } else if (err.code === 'auth/operation-not-allowed') {
+        message = "Google Sign-in is not enabled in Firebase Console. Please enable it in Authentication > Sign-in method.";
+      }
+      setError(message);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleDemoAccess = () => {
+    const mockProfile = {
+      uid: 'demo-admin',
+      name: 'System Administrator (Demo)',
+      email: 'agmhsspatteeswaram@gmail.com',
+      role: 'admin' as const,
+      createdAt: new Date().toISOString()
+    };
+    localStorage.setItem('demo_profile', JSON.stringify(mockProfile));
+    window.location.reload();
   };
 
   return (
@@ -226,6 +209,15 @@ export default function Login() {
                 <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
               </svg>
               Google Account
+            </Button>
+
+            <Button 
+              type="button" 
+              variant="ghost" 
+              onClick={handleDemoAccess}
+              className="w-full py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-indigo-600"
+            >
+              Launch Demo Experience (No Account Needed)
             </Button>
           </form>
 

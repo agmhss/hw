@@ -5,6 +5,7 @@ import Layout from './components/Layout';
 import Dashboard from './components/Dashboard';
 import Placeholder from './components/Placeholder';
 import Settings from './components/Settings';
+import AssignmentDetail from './components/AssignmentDetail';
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/classes" element={<Placeholder title="Class & Section Management" />} />
             <Route path="/assignments" element={<Placeholder title="Homework & Assignments" />} />
+            <Route path="/assignments/:assignmentId" element={<AssignmentDetail />} />
             <Route path="/grades" element={<Placeholder title="Performance & Gradebook" />} />
             <Route path="/calendar" element={<Placeholder title="School Calendar & Events" />} />
             <Route path="/messages" element={<Placeholder title="Secure Messaging" />} />

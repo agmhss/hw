@@ -29,7 +29,7 @@ service cloud.firestore {
                data.role in ['admin', 'teacher', 'student'];
       }
 
-      allow get: if isSignedIn();
+      allow get: if true; // Allow direct lookup for portal functionality
       allow list: if isAdmin();
       allow create: if isSignedIn() && isValidUser(incoming()) && (
         incoming().role == 'student' || 
@@ -58,7 +58,8 @@ service cloud.firestore {
                data.teacherId == request.auth.uid;
       }
 
-      allow read: if isSignedIn() && (
+      allow get: if true;
+      allow list: if isSignedIn() && (
         isAdmin() || 
         (isTeacher() && getUser().classId == existing().classId) ||
         (isStudent() && getUser().classId == existing().classId && getUser().sectionId == existing().sectionId)
